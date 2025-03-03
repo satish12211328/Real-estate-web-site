@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import boy from "../Images/4939473e84994cd638a8211337bfd40f.png"
 import { NavLink } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet'; 
 import 'leaflet/dist/leaflet.css';
 import './FullDetails.css'; 
-import { FaBed, FaBath, FaCar, FaMapMarkerAlt, FaDollarSign, FaExpandArrowsAlt } from 'react-icons/fa';  // Importing icons
+import { FaBed, FaBath, FaCar, FaMapMarkerAlt, FaDollarSign, FaExpandArrowsAlt } from 'react-icons/fa';  
 
 export default function FullDetails() {
   const { id } = useParams(); 
@@ -33,20 +34,21 @@ export default function FullDetails() {
 
   return (
     <div className='main-container'> 
-      <div className='Navrbar'>
+        <div className='Navrbar'>
         <div className='subnavlogo'>
-          <img src={"https://cdn.dribbble.com/userupload/12684044/file/original-e782c45d2bd0e4632a88bafb1e206f0e.png?crop=0x0-1600x1200&format=webp&resize=400x300&vertical=center"} alt='logo' id="im"></img>
-          <h3>FlatFinder</h3>
+            <img src={"https://cdn.dribbble.com/userupload/12684044/file/original-e782c45d2bd0e4632a88bafb1e206f0e.png?crop=0x0-1600x1200&format=webp&resize=400x300&vertical=center"} alt='logo' id="im"></img>
+            <h3>FlatFinder</h3>
         </div>
         <div className='subnavdetail'>
-          <ul id='navdetail'>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/step1">Upload Rooms</NavLink></li>
-            <li><NavLink to="/savedrooms">Saved Rooms</NavLink></li>
-            <li id='navl4'><NavLink to="/find-room">Find a Room</NavLink></li>
-            <li id='navl5'><NavLink to="/images">Image</NavLink></li>
-          </ul>
-        </div>
+    <ul id='navdetail'>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/form">Upload Houses</NavLink></li>
+        <li><NavLink to="/savedrooms">Saved Rooms</NavLink></li>
+        <li id='navl4'><NavLink to="/Singnup">Login</NavLink></li>
+        <li id='navl5'><NavLink to="/images"></NavLink></li>
+    </ul>
+    <img src={boy}></img>
+</div>
       </div>
 
       <div className="full-details-container">
@@ -119,3 +121,4 @@ export default function FullDetails() {
     </div>
   );
 }
+
