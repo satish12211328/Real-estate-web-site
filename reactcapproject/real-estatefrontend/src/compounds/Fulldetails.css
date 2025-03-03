@@ -3,13 +3,14 @@
   color: #333; 
 }
 
-/* Navbar */
+
 .Navrbar {
   display: flex;
   justify-content: space-between; 
   align-items: center; 
   padding: 10px 20px; 
   background-color: #f0f0f0; 
+  margin-top: 10px;
 }
 
 .subnavlogo {
@@ -208,4 +209,8 @@
 }
 #formbutton{
   display: block;
+}
+#email{
+  width: 50%;
+  margin-left: 23px;
 }
