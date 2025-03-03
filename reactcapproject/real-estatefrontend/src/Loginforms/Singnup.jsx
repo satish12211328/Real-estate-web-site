@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import boy from "../Images/4939473e84994cd638a8211337bfd40f.png"
-import Login from "../Loginforms/Login"
-import "./Singnup.css"
+import { NavLink, useNavigate } from "react-router-dom";
+import singup from "../Images/singup.jpg";
+import "./Singnup.css";
+
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,25 +17,21 @@ const SignUpPage = () => {
     const newErrors = {};
     let isValid = true;
 
-    
     if (!username.trim()) {
       newErrors.username = "Please enter your username.";
       isValid = false;
     }
-
 
     if (!email.trim() || !/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Please enter a valid email address.";
       isValid = false;
     }
 
-   
     if (!password.trim()) {
       newErrors.password = "Please enter your password.";
       isValid = false;
     }
 
-  
     if (password !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
       isValid = false;
@@ -43,7 +40,6 @@ const SignUpPage = () => {
     setErrors(newErrors);
 
     if (isValid) {
-      
       try {
         const response = await fetch("http://localhost:5000/signup", {
           method: "POST",
@@ -56,6 +52,7 @@ const SignUpPage = () => {
 
         if (response.ok) {
           alert(data.message);
+          navigate("/Login");
         } else {
           setErrors(data.errors || {});
         }
@@ -66,48 +63,12 @@ const SignUpPage = () => {
   };
 
   return (
-    <div>
-      <div className='Navrbar'>
-              <div className='subnavlogo'>
-                  <img src={"https://cdn.dribbble.com/userupload/12684044/file/original-e782c45d2bd0e4632a88bafb1e206f0e.png?crop=0x0-1600x1200&format=webp&resize=400x300&vertical=center"} alt='logo' id="im"></img>
-                  <h3>FlatFinder</h3>
-              </div>
-              <div className='subnavdetail'>
-          <ul id='navdetail'>
-              <li><NavLink to="/">Home</NavLink></li>
-              <li><NavLink to="/form">Upload Houses</NavLink></li>
-              <li><NavLink to="/savedrooms">Saved Rooms</NavLink></li>
-              <li id='navl4'><NavLink to="/Singnup">Login</NavLink></li>
-              <li id='navl5'><NavLink to="/images"></NavLink></li>
-          </ul>
-          <img src={boy}></img>
-      </div>
-    </div>
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        background: "whitesmoke",
-        flexDirection: "column",
-      }}
-    >
-      <div
-        className="bg-container"
-        style={{
-          backgroundColor: "rgba(255, 255, 255, 0.9)",
-          borderRadius: "10px",
-          padding: "40px",
-          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-          width: "100%",
-          maxWidth: "500px",
-        }}
-      >
-        <h2 className="text-center mt-4" style={{marginBottom:"140px"}}>Sign Up</h2>
-        <form onSubmit={handleSubmit} style={{marginBottom:"180px"}}>
-          <div className="form-group" >
-            <label htmlFor="username" >Username</label>
+    <div className="img-background">
+      <div className="bg-container">
+        <h2 className="text-center">Sign Up</h2>
+        <form onSubmit={handleSubmit} className="formg">
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
             <input
               type="text"
               className={`form-control ${errors.username ? "is-invalid" : ""}`}
@@ -146,12 +107,10 @@ const SignUpPage = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label htmlFor="confirmPassword" style={{marginLeft:"35px"}}>Confirm Password</label>
             <input
               type="password"
-              className={`form-control ${
-                errors.confirmPassword ? "is-invalid" : ""
-              }`}
+              className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
               id="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -160,8 +119,9 @@ const SignUpPage = () => {
             <div className="invalid-feedback">{errors.confirmPassword}</div>
           </div>
 
-          <NavLink to="/Login"><button type="submit" className="btn btn-dark btn-block">Sign up </button></NavLink>
-         
+          <button type="submit" className="btn">
+            Sign up
+          </button>
         </form>
 
         <div className="text-center mt-3">
@@ -171,8 +131,8 @@ const SignUpPage = () => {
         </div>
       </div>
     </div>
-    </div>
   );
 };
 
 export default SignUpPage;
+
